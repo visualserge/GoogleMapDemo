@@ -4,4 +4,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_satellite">Satellite View</string>
     <string name="action_street">Street View</string>
+    <string name="action_terrain">Terrain View</string>
 </resources>

@@ -54,8 +54,10 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
                     break;
             case R.id.action_street:
                     mapView.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                   break;
-
+                    break;
+            case R.id.action_terrain:
+                    mapView.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                    break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -66,9 +68,11 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         this.mapView = map;
         map.setMyLocationEnabled(true);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
-        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
         map.addMarker(new MarkerOptions()
-                .title("My current location")
+                .title("This is your current location")
                 .snippet("Hi Sergio! :)")
                 .position(myLocation));
     }

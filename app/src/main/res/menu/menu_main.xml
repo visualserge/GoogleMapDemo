@@ -6,4 +6,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_street" android:title="@string/action_street"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_terrain" android:title="@string/action_terrain"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>
