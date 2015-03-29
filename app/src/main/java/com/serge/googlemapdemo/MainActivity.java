@@ -13,7 +13,7 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
 
     private double longitude;
     private double latitude;
-
+    private GoogleMap mapView;
     //First google map project
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,6 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -36,6 +35,7 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -47,8 +47,15 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+
+            case R.id.action_satellite:
+                    mapView.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                    break;
+            case R.id.action_street:
+                    mapView.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                   break;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -56,10 +63,10 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
 
     public void onMapReady(GoogleMap map) {
         LatLng myLocation = new LatLng(latitude, longitude);
-
+        this.mapView = map;
         map.setMyLocationEnabled(true);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
-
+        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         map.addMarker(new MarkerOptions()
                 .title("My current location")
                 .snippet("Hi Sergio! :)")
