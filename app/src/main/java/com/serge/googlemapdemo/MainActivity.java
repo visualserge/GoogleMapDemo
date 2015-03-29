@@ -14,7 +14,7 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
     private double longitude;
     private double latitude;
     private GoogleMap mapView;
-    //First google map project
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
