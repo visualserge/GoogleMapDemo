@@ -67,13 +67,39 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         LatLng myLocation = new LatLng(latitude, longitude);
         this.mapView = map;
         map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
+        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
 
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        //map.addMarker(new MarkerOptions()
+        //        .title("This is your current location")
+        //        .snippet("Hi Sergio! :)")
+        //        .position(myLocation));
+
+
+
+        //LatLng mapCenter = new LatLng(41.889, -87.622);
+
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
+
+        // Flat markers will rotate when the map is rotated,
+        // and change perspective when the map is tilted.
         map.addMarker(new MarkerOptions()
+                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.direction_arrow))
                 .title("This is your current location")
                 .snippet("Hi Sergio! :)")
-                .position(myLocation));
+                .position(myLocation)
+                .flat(true)
+                .rotation(245));
+
+        CameraPosition cameraPosition = CameraPosition.builder()
+                .target(myLocation)
+                .zoom(13)
+                .bearing(90)
+                .build();
+
+        // Animate the change in camera view over 2 seconds
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),
+                2000, null);
     }
 }
