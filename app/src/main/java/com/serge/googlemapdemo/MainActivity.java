@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         switch (id){
 
             case R.id.action_satellite:
-                    mapView.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                    mapView.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                     break;
             case R.id.action_street:
                     mapView.setMapType(GoogleMap.MAP_TYPE_NORMAL);
