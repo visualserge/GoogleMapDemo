@@ -9,7 +9,7 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
 
-public class MainActivity extends ActionBarActivity implements OnMapReadyCallback {
+public class MainActivity extends ActionBarActivity {
 
     private double longitude;
     private double latitude;
@@ -20,14 +20,15 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        mapView = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
         LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         longitude = location.getLongitude();
         latitude = location.getLatitude();
+
+        //Set default location :)
+        SetMap(mapView, GoogleMap.MAP_TYPE_NORMAL);
     }
 
 
@@ -35,7 +36,6 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         return true;
     }
 
@@ -50,26 +50,25 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         switch (id){
 
             case R.id.action_satellite:
-                    mapView.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                    SetMap(mapView, GoogleMap.MAP_TYPE_HYBRID);
                     break;
             case R.id.action_street:
-                    mapView.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                    SetMap(mapView, GoogleMap.MAP_TYPE_NORMAL);
                     break;
             case R.id.action_terrain:
-                    mapView.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                    SetMap(mapView, GoogleMap.MAP_TYPE_TERRAIN);
                     break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void onMapReady(GoogleMap map) {
+    private void SetMap(GoogleMap map, int mapType){
         LatLng myLocation = new LatLng(latitude, longitude);
-        this.mapView = map;
         map.setMyLocationEnabled(true);
         //map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
 
-        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setMapType(mapType);
 
         //map.addMarker(new MarkerOptions()
         //        .title("This is your current location")
@@ -102,4 +101,5 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),
                 2000, null);
     }
+
 }
