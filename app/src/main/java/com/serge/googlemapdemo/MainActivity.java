@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
         mapView = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
         LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         longitude = location.getLongitude();
         latitude = location.getLatitude();
 
